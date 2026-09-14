@@ -1,7 +1,13 @@
 # Dataset
 
-This project uses the MS-COCO 2014 dataset and pre-extracted visual features.
+This project uses the MS COCO 2014 dataset and pre-extracted visual features.
 
-The complete dataset, HDF5 feature files, and large generated files are not included in this repository because of their size.
+The dataset is used for training and evaluating the Arabic image captioning and visual question generation models.
 
-Please prepare the required data files before running the notebooks.
+The complete dataset, HDF5 feature files, and other large files are not included in this repository because of their size.
+
+## Dataset Download
+
+You can download the dataset from the official website:
+
+https://cocodataset.org/#download
