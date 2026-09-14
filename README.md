@@ -1,0 +1,150 @@
+# Arabic Visual Question Generation
+
+This project presents a deep learning-based system for generating meaningful and context-aware questions in Arabic from images.
+
+The proposed approach uses the **Bottom-Up and Top-Down Attention mechanism** to understand visual content and generate Arabic questions that are relevant to the image.
+
+## Project Overview
+
+Visual Question Generation (VQG) is the task of automatically generating natural-language questions from images. While most existing approaches focus on English, Arabic Visual Question Generation remains an underexplored research area due to the complexity of the Arabic language and the limited availability of Arabic datasets.
+
+This project aims to address this gap by developing a model that can analyze an image and generate a meaningful Arabic question based on its visual content.
+
+## Proposed Approach
+
+The proposed model consists of the following components:
+
+1. **Bottom-Up Attention**
+
+   Faster R-CNN with a ResNet-101 backbone is used to extract visual features from important image regions. The visual features were pre-extracted using a model trained on the Visual Genome dataset.
+
+2. **Top-Down Attention**
+
+   The attention mechanism determines which visual regions are most relevant to the current linguistic context.
+
+3. **LSTM Language Model**
+
+   An LSTM-based language model generates the Arabic question word by word.
+
+4. **Arabic Text Processing**
+
+   Arabic captions and questions were prepared through translation and preprocessing to create a dataset suitable for training and evaluating the models.
+
+## System Pipeline
+
+```text
+Input Image
+     ↓
+Visual Feature Extraction
+(Faster R-CNN + ResNet-101)
+     ↓
+Bottom-Up and Top-Down Attention
+     ↓
+LSTM Language Model
+     ↓
+Generated Arabic Question
+```
+
+## Dataset
+
+The project uses the **MS-COCO 2014 dataset** with the standard Karpathy split for training, validation, and testing.
+
+Since a large-scale native Arabic VQG dataset is not readily available, captions and questions were translated into Arabic using GPT-4.1-mini and then processed for model training and evaluation.
+
+The visual features were extracted from important image regions and stored in HDF5 format for efficient training.
+
+## Project Stages
+
+### 1. Arabic Image Captioning
+
+The first stage generates Arabic image captions. This stage is used as a baseline for comparison.
+
+The captioning model uses the Bottom-Up and Top-Down Attention architecture to generate Arabic descriptions of images.
+
+### 2. Arabic Question Generation
+
+The second stage directly generates Arabic questions from image features using the proposed Visual Question Generation model.
+
+Unlike the baseline, the proposed model generates questions directly from the image instead of generating a caption first.
+
+## Baseline Model
+
+The baseline follows a two-step approach:
+
+```text
+Image
+  ↓
+Arabic Caption Generation
+  ↓
+Arabic Question Generation
+```
+
+The proposed model is compared with this baseline to evaluate whether direct question generation improves visual grounding and semantic relevance.
+
+## Evaluation Metrics
+
+The generated Arabic questions are evaluated using the following metrics:
+
+* BLEU-1
+* BLEU-4
+* METEOR
+* ROUGE-L at the word level
+* ROUGE-L at the character level
+* CIDEr
+* BERTScore / BERT-F1
+
+Both quantitative and qualitative evaluations are used to analyze the quality, relevance, fluency, and semantic accuracy of the generated questions.
+
+## Repository Structure
+
+```text
+arabic-visual-question-generation/
+│
+├── captioning/
+│   ├── train2.ipynb
+│   ├── eval2.ipynb
+│   ├── models2.ipynb
+│   ├── utils2.ipynb
+│   └── the_datasets2.ipynb
+│
+├── eval3.ipynb
+├── models3.ipynb
+├── the_datasets3.ipynb
+├── train3.ipynb
+└── utils3.ipynb
+```
+
+## Technologies
+
+* Python
+* PyTorch
+* Google Colab
+* Faster R-CNN
+* ResNet-101
+* LSTM
+* Bottom-Up and Top-Down Attention
+* MS-COCO Dataset
+* Visual Genome Features
+* HDF5
+
+## Limitations
+
+The Arabic dataset was created through translation because of the limited availability of native Arabic VQG datasets. Therefore, translated expressions may contain linguistic variations or translation artifacts.
+
+In addition, automatic evaluation metrics may not fully represent the quality and semantic correctness of Arabic questions.
+
+## Future Work
+
+Future improvements may include:
+
+* Creating a native Arabic dataset with human-written captions and questions.
+* Adding human evaluation for question quality and answerability.
+* Exploring stronger visual feature extraction methods.
+* Improving Arabic language processing and question diversity.
+* Investigating additional decoding and training strategies.
+
+## Acknowledgements
+
+This project was developed as a graduation project in Computer Science at King Saud University.
+
+The implementation was inspired by the Bottom-Up and Top-Down Attention image captioning architecture and adapted for Arabic Visual Question Generation.
